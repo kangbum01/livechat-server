@@ -12,3 +12,4 @@ C:\Users\alvin\Desktop\project\live-chat\client\obj\Debug\net8.0\refint\client.d
 C:\Users\alvin\Desktop\project\live-chat\client\obj\Debug\net8.0\client.pdb
 C:\Users\alvin\Desktop\project\live-chat\client\obj\Debug\net8.0\client.genruntimeconfig.cache
 C:\Users\alvin\Desktop\project\live-chat\client\obj\Debug\net8.0\ref\client.dll
+C:\Users\alvin\Desktop\project\live-chat\client\obj\Debug\net8.0\client.sourcelink.json

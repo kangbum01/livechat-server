@@ -26,3 +26,4 @@ C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\refint\liv
 C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\livechat.pdb
 C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\livechat.genruntimeconfig.cache
 C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\ref\livechat.dll
+C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\livechat.sourcelink.json
