@@ -24,6 +24,8 @@ namespace ChatServerExample
             get;
             private set;
         }
+        public int PosX {get; private set;}
+        public int PosY {get; private set;}
 
         public bool IsConnected
         {
@@ -46,7 +48,8 @@ namespace ChatServerExample
 
             _isRunning = true;
             _isLoggedIn = false;
-
+            PosX = 0;
+            PosY = 0;
         }
 
         public async Task ReceiveLoopAsync()
@@ -82,13 +85,16 @@ namespace ChatServerExample
 
         private async Task HandlePacketAsync(string packet)
         {
+            Console.WriteLine("[DEBUG] raw packet = " + packet);
             string[] parts = packet.Split('|', 2);
             string command = parts[0].Trim().ToUpper();
             string body = parts.Length > 1 ? parts[1].Trim() : "";
 
+            Console.WriteLine("[DEBUG] command = " + command);
+            Console.WriteLine("[DEBUG] body = " + body);
             switch (command)
             {
-                case "Login":
+                case "LOGIN":
                     await HandleLoginAsync(body);
                     break;
                 case "CHAT":
@@ -97,10 +103,43 @@ namespace ChatServerExample
                 case "QUIT":
                     await HandleQuitAsync();
                     break;
+                case "MOVE":
+                    await HandleMoveAsync(body);
+                    break;
                 default:
                     await SendAsync("[서버] 알 수 없는 명령입니다. LOGIN|닉네임, CHAT|메시지, QUIT| 를 입력하세요.");
                     break;
             }
+        }
+
+        private async Task HandleMoveAsync(string move)
+        {
+            if (_isLoggedIn == false)
+            {
+                await SendAsync("[서버] 로그인 작업을 먼저 완료하세요. ");
+            }
+            switch (move.ToLower())
+            {
+                case "left":
+                    PosX -= 1;
+                    break;
+                case "right":
+                    PosX += 1;
+                    break;
+                case "up":
+                    PosY += 1;
+                    break;
+                case "down":
+                    PosY -= 1;
+                    break;
+                default:
+                    await SendAsync("[서버] 잘못 된 방향 입니다. ex) left, right, up, down");
+                    return;
+            }
+            Console.WriteLine("[이동] " + SessionName + " -> (" + PosX + " , " + PosY + ")");
+
+            await SendAsync("[서버] 내 위치: (" + PosX + ", " + PosY + ")");
+            await _server.BroadcastAsync("[이동] " + SessionName + " -> (" + PosX + ", " + PosY + ")", this);
         }
 
         private async Task HandleLoginAsync(string name)
@@ -115,9 +154,12 @@ namespace ChatServerExample
             {
                 SessionName = name;
                 _isLoggedIn = true;
+                PosX = 0;
+                PosY = 0;
 
                 await SendAsync("[서버] 로그인 완료: "+ SessionName);
                 await _server.BroadcastAsync("[서버] " + SessionName + " 님이 입장했습니다.", this);
+                await SendAsync("[서버] 현재 위치 : (" + PosX + " , " + PosY + ")" );
             }
             else
             {
@@ -144,8 +186,8 @@ namespace ChatServerExample
             }
 
             Console.WriteLine("[" + SessionName + "]" + message);
-
-            await SendAsync(" [나] " + message);
+            // 메시지가 잘 전달 되는지 확인하기 위한 코드
+            //await SendAsync(" [나] " + message);
             await _server.BroadcastAsync("[" + SessionName + "]" + message, this);
 
         }

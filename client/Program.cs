@@ -8,6 +8,7 @@ namespace ChatClientExample
 {
     internal class Program
     {
+        private static bool _isClosing = false;
         static async Task Main(string[] args)
         {
             TcpClient client = new TcpClient();
@@ -21,8 +22,6 @@ namespace ChatClientExample
             //계속 동작하게 설정
             writer.AutoFlush = true;
 
-            Task receiveTask = ReceiveLoopAsync(reader);
-
             Console.WriteLine("닉네임을 입력하세요: ");
             string nickname = Console.ReadLine();
 
@@ -33,9 +32,12 @@ namespace ChatClientExample
 
             await writer.WriteLineAsync("LOGIN|" + nickname);
 
+            Task receiveTask = ReceiveLoopAsync(reader);
+
             Console.WriteLine("[Client] 채팅을 입력하세요.");
             Console.WriteLine("[Client] /name 새이름  -> 닉네임 변경");
             Console.WriteLine("[Client] /quit        -> 종료");
+            Console.WriteLine("[Cleint] /move 방향    -> 캐릭터 위치 이동");
 
             try
             {
@@ -51,11 +53,12 @@ namespace ChatClientExample
 
                     if (input.Trim().ToLower() == "/quit")
                     {
+                        _isClosing = true;
                         await writer.WriteLineAsync("QUIT|");
                         break;
                     }
 
-                    if (input.StartsWith("/name"))
+                    if (input.StartsWith("/name "))
                     {
                         string newName = input.Substring(6).Trim();
 
@@ -68,17 +71,40 @@ namespace ChatClientExample
                         await writer.WriteLineAsync("LOGIN|" + newName);
                         continue;
                     }
+
+                    if (input.Trim().ToLower() == "/move")
+                    {
+                        Console.WriteLine("[Client] 이동 방향을 입력하세요. 예: /move left");
+                        continue;
+                    }
+                    if (input.StartsWith("/move "))
+                    {
+                        string direction = input.Substring(6).Trim().ToLower();
+
+                        if (string.IsNullOrWhiteSpace(direction))
+                        {
+                            Console.WriteLine("[Client] 이동 방향을 입력하세요.");
+                            continue;
+                        }
+                        await writer.WriteLineAsync("MOVE|" + direction);
+                        continue;
+                    }
                     await writer.WriteLineAsync("CHAT|" + input);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("[Client 오류]" + ex.Message);
+                if( _isClosing == false)
+                {
+                    Console.WriteLine("[Client 오류]" + ex.Message);
+                }
             }
             finally
             {
                 try
                 {
+                    _isClosing = true;
+                    reader.Close();
                     stream.Close();
                     client.Close();
                 }
@@ -110,7 +136,11 @@ namespace ChatClientExample
             }
             catch (Exception ex)
             {
-                Console.WriteLine("[Client Receive 오류] " + ex.Message);
+                if(_isClosing == false)
+                {
+                    Console.WriteLine("[Client Receive 오류] " + ex.Message);
+                }
+                
             }
         }
     }

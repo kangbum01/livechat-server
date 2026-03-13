@@ -27,3 +27,18 @@ C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\livechat.p
 C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\livechat.genruntimeconfig.cache
 C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\ref\livechat.dll
 C:\Users\alvin\Desktop\project\live-chat\chat_server\obj\Debug\net8.0\livechat.sourcelink.json
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\bin\Debug\net8.0\livechat.exe
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\bin\Debug\net8.0\livechat.deps.json
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\bin\Debug\net8.0\livechat.runtimeconfig.json
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\bin\Debug\net8.0\livechat.dll
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\bin\Debug\net8.0\livechat.pdb
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\livechat.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\livechat.AssemblyInfoInputs.cache
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\livechat.AssemblyInfo.cs
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\livechat.csproj.CoreCompileInputs.cache
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\livechat.sourcelink.json
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\livechat.dll
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\refint\livechat.dll
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\livechat.pdb
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\livechat.genruntimeconfig.cache
+C:\Users\alvin\OneDrive\바탕 화면\project\livechat-server\chat_server\obj\Debug\net8.0\ref\livechat.dll
